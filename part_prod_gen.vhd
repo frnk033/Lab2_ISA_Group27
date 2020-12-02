@@ -40,6 +40,8 @@ signal q, p: pp_array;
 signal B_new: std_logic_vector(34 downto 0);
 signal s: std_logic_vector(16 downto 0);
 
+signal two_A, A_33bits: std_logic_vector(nb downto 0);
+
 component mux3to1 is 
 	Generic(N: integer:= 33);
 	Port(	A:	In	std_logic_vector(N-1 downto 0) ;
@@ -52,16 +54,18 @@ end component;
 
 begin
 B_new <= "00" & B & '0';
+A_33bits <= A(nb-1)& A;
+two_A  <= A & '0';
 pp_generator:for i in 0 to 16 generate 
 						--combinational logic for control signal generation
 						c(i)(0) <= NOT(B_new(2*i+1) XOR B_new(2*i)) AND NOT(B_new(2*i+2) XOR B_new(2*i+1));
 						c(i)(1) <= B_new(2*i+1) XOR B_new(2*i);
 				 		c(i)(2) <= NOT(B_new(2*i+1) XOR B_new(2*i)) AND (B_new(2*i+1) XOR B_new(2*i+1));
 						--multiplexer
-						muxes: mux3to1 port map (A=> (others => '0'), B=>A(nb-1)&A, C=>A & '0', S => c(i), Y => q(i) );
+						muxes: mux3to1 port map (A=> (others => '0'), B=>A_33bits, C=>two_A, S => c(i), Y => q(i) );
 						--partial product generation
 						pp: for j in 0 to nb generate
-									p(i)(j) <= (B_new(2*i+2) XOR q(i)(j));-- OR B_new(2*i+2);
+									p(i)(j) <= (B_new(2*i+2) XOR q(i)(j)); --OR B_new(2*i+2);
 							 end generate;
 						--s signal preparation for signal extension
 						s(i) <= B_new(2*i+2);
