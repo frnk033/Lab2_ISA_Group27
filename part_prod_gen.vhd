@@ -61,7 +61,7 @@ pp_generator:for i in 0 to 16 generate
 						muxes: mux3to1 port map (A=> (others => '0'), B=>A(nb-1)&A, C=>A & '0', S => c(i), Y => q(i) );
 						--partial product generation
 						pp: for j in 0 to nb generate
-									p(i)(j) <= (B_new(2*i+2) XOR q(i)(j)) OR B_new(2*i+2);
+									p(i)(j) <= (B_new(2*i+2) XOR q(i)(j));-- OR B_new(2*i+2);
 							 end generate;
 						--s signal preparation for signal extension
 						s(i) <= B_new(2*i+2);
