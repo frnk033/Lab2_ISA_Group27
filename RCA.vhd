@@ -13,21 +13,21 @@ end entity;
 architecture str of RCA is 
 
 signal c_v: std_logic_vector(nb-1 downto 0);
+
 component FA is 
-port(a:     in std_logic; 
-     b:     in std_logic;
-	  c_in:  in std_logic;
-	  c_out: out std_logic;
-	  s:     out std_logic
-	  );
+	Port (	A :	In	std_logic;
+		      B :	In	std_logic;
+		      Ci:	In	std_logic;
+		      S :	Out	std_logic;
+		      Co:	Out	std_logic);
 end component;
 
 begin
 
-FA_fisrt: FA port map (a => A(0), b => B(0), c_in => '0', c_out => c_v(0), s => Z(0));
+FA_fisrt: FA port map (a => A(0), b => B(0), ci => '0', s => Z(0), co => c_v(0));
 
 FA_generation: for i in 1 to 63 generate 
-					Full_adders: FA port map (a =>A(i), b => B(i), c_in => c_v(i-1), c_out => c_v(i), s =>z(i) );
+					Full_adders: FA port map (a =>A(i), b => B(i), ci => c_v(i-1), s =>z(i)  , co => c_v(i));
 					end generate;
 					
 end architecture;

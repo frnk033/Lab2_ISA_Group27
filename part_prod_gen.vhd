@@ -54,7 +54,7 @@ end component;
 
 begin
 B_new <= "00" & B & '0';
-A_33bits <= A(nb-1)& A;
+A_33bits <= '0'&A;--A(nb-1)& A;
 two_A  <= A & '0';
 pp_generator:for i in 0 to 16 generate 
 						--combinational logic for control signal generation
