@@ -205,7 +205,7 @@ L2(6)(21 downto 10) <= L1(10)(21 downto 20) & L1(6)(19 downto 10);
 L2(7)(52 downto 45) <= L1(7)(52 downto 47) & L1(10)(46 downto 45);
 L2(7)(22 downto 12) <= L1(11)(22 downto 20) & L1(7)(19 downto 12);
 
-L2(8)(50 downto 14) <= 	L1(8)(50 downto 46) & L1(9)(45) & L1(10)(44) &
+L2(8)(50 downto 14) <= 	L1(8)(50 downto 46) & L1(9)(45) & L1(11)(44) &
 								L1(12)(43 downto 22) & L1(9)(21) & L1(8)(20 downto 14);
 
 								
