@@ -60,7 +60,7 @@ pp_generator:for i in 0 to 16 generate
 						--combinational logic for control signal generation
 						c(i)(0) <= NOT(B_new(2*i+1) XOR B_new(2*i)) AND NOT(B_new(2*i+2) XOR B_new(2*i+1));
 						c(i)(1) <= B_new(2*i+1) XOR B_new(2*i);
-				 		c(i)(2) <= NOT(B_new(2*i+1) XOR B_new(2*i)) AND (B_new(2*i+1) XOR B_new(2*i+1));
+				 		c(i)(2) <= NOT(B_new(2*i+1) XOR B_new(2*i)) AND (B_new(2*i+2) XOR B_new(2*i+1));
 						--multiplexer
 						muxes: mux3to1 port map (A=> (others => '0'), B=>A_33bits, C=>two_A, S => c(i), Y => q(i) );
 						--partial product generation
