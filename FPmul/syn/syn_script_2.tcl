@@ -27,7 +27,7 @@ set OLOAD [load_of NangateOpenCellLibrary/BUF_X4/A]
 set_load $OLOAD [all_outputs]
 ungroup -all -flatten
 set_implementation DW02_mult/csa [find cell *mult*]
-#set implementation_DW02 mult/pparch[f ind cell I2/mult 134]
+
 
 # START THE SYNTHESIS
 compile
